@@ -10,6 +10,5 @@
         public function update($lot_id,$camera_id);
         public function deleteByLotId($lotId);
         public function deleteBySensorId($sensorId);
-        public function multiDeleteByCategoryId($cameraId);
         public function multiDeleteByLotId($lotId);
     }

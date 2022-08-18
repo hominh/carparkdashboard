@@ -125,7 +125,6 @@ class KioskController extends Controller
         //$permission = $this->authorize('multiDelete',Category::class);
         $ids = $request->ids;
         $result = $this->kiosk->deleteMultiRecords($ids);
-        //$resultDeletePostCategories = $this->postCategories->multiDeleteByCategoryId($ids);
 
         if($result == "true")
             return response()->json(['status'=>'success','message'=>"Kiosk deleted successfully."]);

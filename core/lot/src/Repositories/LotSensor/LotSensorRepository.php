@@ -49,17 +49,6 @@ class LotSensorRepository implements LotSensorRepositoryInterface
         return false;
     }
 
-    public function multiDeleteByCategoryId($sensorsId)
-    {
-
-        $arr_id = explode(",",$sensorsId);
-        for($i = 0; $i < count($arr_id); $i++)
-        {
-            $result = $this->deleteByCategoryId($arr_id[$i]);
-
-        }
-        return $result;
-    }
 
     public function multiDeleteByLotId($lotId)
     {

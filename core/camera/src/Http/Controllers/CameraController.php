@@ -110,7 +110,6 @@ class CameraController extends Controller
         //$permission = $this->authorize('multiDelete',Category::class);
         $ids = $request->ids;
         $result = $this->camera->deleteMultiRecords($ids);
-        //$resultDeletePostCategories = $this->postCategories->multiDeleteByCategoryId($ids);
 
         if($result == "true")
             return response()->json(['status'=>'success','message'=>"Camera deleted successfully."]);

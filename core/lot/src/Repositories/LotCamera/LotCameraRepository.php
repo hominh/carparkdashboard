@@ -49,18 +49,6 @@ class LotCameraRepository implements LotCameraRepositoryInterface
         return false;
     }
 
-    public function multiDeleteByCategoryId($camerasId)
-    {
-
-        $arr_id = explode(",",$camerasId);
-        for($i = 0; $i < count($arr_id); $i++)
-        {
-            $result = $this->deleteByCategoryId($arr_id[$i]);
-
-        }
-        return $result;
-    }
-
     public function multiDeleteByLotId($lotId)
     {
 

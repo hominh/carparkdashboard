@@ -110,7 +110,6 @@ class SensorController extends Controller
         //$permission = $this->authorize('multiDelete',Category::class);
         $ids = $request->ids;
         $result = $this->sensor->deleteMultiRecords($ids);
-        //$resultDeletePostCategories = $this->postCategories->multiDeleteByCategoryId($ids);
 
         if($result == "true")
             return response()->json(['status'=>'success','message'=>"Sensor deleted successfully."]);

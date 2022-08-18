@@ -114,7 +114,6 @@ class BasementController extends Controller
         //$permission = $this->authorize('multiDelete',Category::class);
         $ids = $request->ids;
         $result = $this->basement->deleteMultiRecords($ids);
-        //$resultDeletePostCategories = $this->postCategories->multiDeleteByCategoryId($ids);
 
         if($result == "true")
             return response()->json(['status'=>'success','message'=>"Basement deleted successfully."]);
