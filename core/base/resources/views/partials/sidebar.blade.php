@@ -84,7 +84,13 @@
                     </li>
                 </ul>
             </li>
-
+            <li class="">
+                <a href="{{url('params')}}">
+                    <i class="fa fa-plug"></i> <span>Cấu hình tham số</span><span data-toggle="tooltip" title=""></span>
+                    <span class="pull-right-container">
+                    </span>
+                </a>
+            </li>
             <li class="treeview">
                 <a href="{{url('status')}}"><i class="fa fa-desktop" aria-hidden="true"></i><span>Thiết bị trung tâm</span></a>
                 <ul class="treeview-menu">
