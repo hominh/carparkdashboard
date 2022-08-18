@@ -40,16 +40,22 @@ class ParamsController extends Controller
         $result = 1;
         $arr_result = array();
         $data = $request->all();
-        for($i = 0; $i < count($data["arrParamname"]); $i++)
+        if(count($data["arrParamname"]) <= 0)
+        	$result = 0;
+        else
         {
-        	$isUpdateSuccess = $this->params->update($data["arrParamname"][$i],$data["arrParamvalue"][$i]);
-        	array_push($arr_result,$isUpdateSuccess);
+        	for($i = 0; $i < count($data["arrParamname"]); $i++)
+	        {
+	        	$isUpdateSuccess = $this->params->update($data["arrParamname"][$i],$data["arrParamvalue"][$i]);
+	        	array_push($arr_result,$isUpdateSuccess);
+	        }
+	        for($i = 0; $i < count($arr_result); $i++)
+	        {
+	        	if($arr_result[$i] != 1)
+	        		$result = 0;
+	        }
         }
-        for($i = 0; $i < count($arr_result); $i++)
-        {
-        	if($arr_result[$i] != 1)
-        		$result = 0;
-        }
+        
         echo json_encode($result);
         //dd($data["arrParamname"][0]);
 	}
