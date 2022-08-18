@@ -46,8 +46,10 @@ class BaseServiceProvider extends ServiceProvider
 	    }
 	    if(count($history) > 0)
 	    {
+	    	exec('git describe --tags --abbrev=0', $versionData);
+	    	//dd($versionData[0]);
 	    	$str = $history[0];
-	    	$result = "Commit: " . $str["hash"]. " | Commit date: " . $str["date"];
+	    	$result = $versionData[0]." Commit: " . $str["hash"]. " | Commit date: " . $str["date"];
 	    	//dd($result);
 	    	return $result;
 	    }

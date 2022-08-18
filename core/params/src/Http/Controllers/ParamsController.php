@@ -14,6 +14,11 @@ class ParamsController extends Controller
 		$this->params = $params;
 	}
 
+	public function index()
+	{
+		
+	}
+
 	public function getDataByParamname()
 	{
 		$result = $this->params->findByName('STATUS_DEVICE');
