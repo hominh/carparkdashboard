@@ -1,0 +1,29 @@
+{
+    "name": "carparkdashboard/lot",
+    "description": "Lot module",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "src/Helpers/functions.php"
+        ],
+        "psr-4": {
+            "Carparkdashboard\\Lot\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Carparkdashboard\\Lot\\Providers\\LotServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "hominh",
+            "email": "minhhh12@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

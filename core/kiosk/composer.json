@@ -1,0 +1,33 @@
+{
+    "name": "carparkdashboard/kiosk",
+    "description": "Kiosk module",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "src/Helpers/functions.php"
+        ],
+        "psr-4": {
+            "Carparkdashboard\\Kiosk\\": "src/"
+        },
+        "files": [
+            "src/helpers/slug.php",
+            "src/helpers/datetime.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Carparkdashboard\\Kiosk\\Providers\\KioskServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "hominh",
+            "email": "minhhh12@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

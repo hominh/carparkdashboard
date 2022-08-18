@@ -1,0 +1,29 @@
+{
+    "name": "carparkdashboard/params",
+    "description": "Params module",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "src/Helpers/functions.php"
+        ],
+        "psr-4": {
+            "Carparkdashboard\\Params\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Carparkdashboard\\Params\\Providers\\ParamsServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "hominh",
+            "email": "minhhh12@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

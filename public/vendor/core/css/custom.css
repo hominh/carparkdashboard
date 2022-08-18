@@ -1,0 +1,29 @@
+.skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a {
+    background: #d64635 !important;
+}
+.skin-blue .sidebar-menu>li>a {
+    border-left: none !important;
+    border-top: 1px solid #484848 !important;
+    color: #d9d9d9 !important;
+}
+.skin-blue .sidebar-menu>li>.treeview-menu {
+    background: none !important;
+}
+
+.skin-blue .sidebar-menu .treeview-menu>li.active>a {
+    background: #474747!important;
+}
+
+.skin-blue .main-header .navbar {
+    background-color: #1f1f1f;
+}
+.skin-blue .main-header .logo {
+    background-color: #1f1f1f;
+}
+.main-footer {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.treeview-menu {
+    padding-left: 0px !important;
+}

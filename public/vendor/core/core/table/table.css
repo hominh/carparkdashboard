@@ -1,0 +1,12 @@
+.dataTables_wrapper .dataTables_processing {
+    background: url(/vendor/core/core/images/table-loading.gif) no-repeat !important;
+    background-size: contain !important;
+    border: none !important;
+    height: 40px !important;
+    padding: 0 !important;
+    text-indent: -9999px !important;
+    width: 40px !important;
+}
+table.dataTable thead th, table.dataTable thead td {
+	border-bottom: none !important;
+}

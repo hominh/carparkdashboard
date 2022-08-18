@@ -1,0 +1,33 @@
+{
+    "name": "carparkdashboard/camera",
+    "description": "Camera module",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "files": [
+            "src/Helpers/functions.php"
+        ],
+        "psr-4": {
+            "Carparkdashboard\\Camera\\": "src/"
+        },
+        "files": [
+            "src/helpers/slug.php",
+            "src/helpers/datetime.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Carparkdashboard\\Camera\\Providers\\CameraServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "hominh",
+            "email": "minhhh12@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
