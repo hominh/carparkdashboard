@@ -28,8 +28,6 @@ class StatusController extends Controller
     protected $basement;
 	public function __construct(CameraRepositoryInterface $camera,LotRepositoryInterface $lot,LotCameraRepositoryInterface $lotcamera,SensorRepositoryInterface $sensor, BasementRepositoryInterface $basement, KioskRepositoryInterface $kiosk)
     {
-        //echo "__construct";
-        //$this->middleware('auth');
         $this->camera = $camera;
         $this->lot = $lot;
         $this->lotcamera = $lotcamera;

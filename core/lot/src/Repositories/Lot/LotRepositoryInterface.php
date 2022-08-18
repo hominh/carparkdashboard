@@ -21,6 +21,5 @@
 		public function updatePath2($id, $x2_path,$y2_path);
 		public function getPathFromBasement($basement);
 		public function findLotByCoordinate($basement,$x,$y);
-		//public function calcArea($x1, $y1, $x2,$y2, $x3, $y3);
 		public function checkPointInsideRectangle($x1, $y1, $x2, $y2, $x, $y);
 	}
