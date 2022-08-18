@@ -23,7 +23,6 @@ class LotRepository implements LotRepositoryInterface
 
     public function tracking($basement)
     {
-        //return Lot::orderBy('status')->with(["basement" => function($q) use($basement){$q->where('basement_id','=',$basement);}])->with('camera')->with('sensor')->where('status','!=',2)->where('status','!=',3)->get();
         $query = "SELECT a.name,a.status,a.id,a.x1_web,a.y1_web,a.x2_web,a.y2_web,a.x3_web,a.y3_web,a.x4_web,a.y4_web, a.plate,a.is_change FROM lots a LEFT JOIN  lot_basement b ON a.id = b.lot_id WHERE b.basement_id = ? AND a.status != 20 AND a.status != 3";
         $lot = DB::select($query,[$basement]);
         return $lot;
@@ -57,20 +56,9 @@ class LotRepository implements LotRepositoryInterface
 
     public function getLotByPlate($plate)
     {
-        //$arr_str_plate = str_split($plate);
-        //$plate = "%".$plate."%";
         $query = "SELECT a.id, a.x1_path,a.y1_path,a.x2_path,a.y2_path,b.plate,b.status,b.id as lot_id, a.kiosk_id as kiosk_id";
         $query.= " FROM lot_paths a LEFT JOIN lots b ON a.lot_id = b.id ";
-        //$query.= " LEFT JOIN lot_basement c ON b.id = c.lot_id LEFT JOIN basements d ON c.basement_id = d.id ";
         $query.= " WHERE b.plate LIKE '%".$plate."%'";
-
-        /*for($i = 0; $i < count($arr_str_plate); $i++)
-        {
-            if($i == 0) $query.= "  WHERE b.plate LIKE '%".$arr_str_plate[0]."%'";
-            if($i > 0) $query.= "  AND b.plate LIKE '%".$arr_str_plate[$i]."%'";
-
-        }*/
-        //$lot = Lot::where('plate',$plate)->where('name','!=','test')->with('camera')->get();
         $lot = DB::select(DB::raw($query));
         for($i = 0; $i < count($lot); $i++)
         {
@@ -115,14 +103,12 @@ class LotRepository implements LotRepositoryInterface
     public function updatePath($id, $x1_path,$y1_path)
     {
         $resetPath  = DB::update('update lots set x1_path = ?, y1_path = ? where id = ?',["","",$id]);
-        //$clearValue = DB::update('update lots set x1_path = ?, y1_path = ? where id = ?',["","",$id]);
         $result = DB::update('update lots set x1_path = x1_path + ?, y1_path = y1_path + ? where id = ?',[$x1_path,$y1_path,$id]);
         return $result;
     }
     public function updatePath2($id, $x2_path,$y2_path)
     {
         $resetPath  = DB::update('update lots set x2_path = ?, y2_path = ? where id = ?',["","",$id]);
-        //$clearValue = DB::update('update lots set x1_path = ?, y1_path = ? where id = ?',["","",$id]);
         $result = DB::update('update lots set x2_path = x2_path + ?, y2_path = y2_path + ? where id = ?',[$x2_path,$y2_path,$id]);
         return $result;
     }
