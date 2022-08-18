@@ -75,19 +75,19 @@ class StatusController extends Controller
 
     public function getData($basement)
     {
-        $result = array();
+        //$result = array();
         $lots = $this->lot->tracking($basement);
-
-        for($i = 0; $i < count($lots); $i++)
+        
+        /*for($i = 0; $i < count($lots); $i++)
         {
             if($lots[$i]->is_change == 1)
             {
                 $result[$i] = $lots[$i];
                 $this->update_isChange($lots[$i]->id,2);
             }
-        }
-        $result["countEnableLot"] = $this->lot->countLot($basement, 0);
-        return Response::json($result);
+        }*/
+        $lots["countEnableLot"] = $this->lot->countLot($basement, 0);
+        return Response::json($lots);
     }
 
     public function update_isChange($id,$is_change)
