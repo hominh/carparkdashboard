@@ -147,6 +147,11 @@ $('document').ready(function() {
 	var urlSearchPlate = "status/getbyplate";
    	$('#searchPlate2').select2({
         minimumInputLength: 1,
+        language: {
+  			inputTooShort: function() {
+  				return 'Vui lòng nhập biển số xe';
+  			}
+  		},
         ajax: {
             url: urlSearchPlate,
             dataType: 'json',
