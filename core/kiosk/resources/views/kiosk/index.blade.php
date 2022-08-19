@@ -7,7 +7,7 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header bg-danger">
-                        <h4 class="modal-title"><i class="til_img"></i><strong>Confirm delete</strong></h4>
+                        <h4 class="modal-title"><i class="til_img"></i><strong>Xóa bản ghi</strong></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -15,7 +15,7 @@
 
                     <form action="" method="get">
                             <div class="modal-body with-padding">
-                                <div>Do you really want to delete this record?</div>
+                                <div>Bạn có muốn xóa bản ghi này?</div>
                             </div>
                         {{csrf_field()}}
                         <div class="modal-footer">
@@ -109,11 +109,11 @@
                     });
                     if(ids.length <= 0)
                     {
-                        alert("Please select row.");
+                        alert("Chưa chọn dòng cần xóa");
                     }
                     else
                     {
-                        var check = confirm("Are you sure you want to delete this row?");
+                        var check = confirm("Bạn có muốn xóa các bản ghi này");
                         if(check == true){
                             var join_selected_values = ids.join(",");
                             var url = '{{ url("/kiosk/multi-destroy") }}';
@@ -124,15 +124,15 @@
                                 data: 'ids='+join_selected_values,
                                 success: function (data) {
                                     if(data.status == 'success')
-                                        toastr.success("Delete kiosk successfully");
+                                        toastr.success("Xóa kiosk thành công");
                                 else
-                                        toastr.error("Delete kiosk unsuccessfully");
+                                        toastr.error("Xóa kiosk thất bại");
                                 window.LaravelDataTables["listKiosk"].ajax.reload();
                                 },
                                 error: function (error) {
                                     if(error.status == 403)
                                         window.LaravelDataTables["listKiosk"].ajax.reload();
-                                        toastr.error("Error: 403. Delete kiosk unsuccessfully");
+                                        toastr.error("Lỗi: 403. Xóa kiosk thất bại");
                                     }
                                 });
                             }

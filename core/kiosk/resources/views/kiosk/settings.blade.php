@@ -8,6 +8,7 @@
 	}
 </style>
 @section('page')
+<meta name="_token" content="{{ csrf_token() }}">
 <div class="content-wrapper">
 	<section class="content">
 		<div class="row">
@@ -71,7 +72,7 @@
 			</div>
 			<div class="col-md-2">
 				<button type="button" name="save" id="savekiosk" value="save" class="btn btn-info">
-					<i class="fa fa-save"></i> Save
+					<i class="fa fa-save"></i> :Lưu
 				</button>
 			</div>
 		</div>
@@ -209,10 +210,13 @@
     			.find('option')
     			.remove();
 			var url = "{{URL('basement/getdatabyid/')}}";
-	    	url = url + "/" + basement;
 	    	$.ajax({
 				url: url,
-				method:"GET",
+				method:"POST",
+				data: {
+	                "_token": $('meta[name="_token"]').attr('content'),
+	                basement: basement,
+	            },
 				success: function( data ) {
 					$("#image_preview").attr("src", JSON.parse(data).image);
 					$.each(JSON.parse(data).kiosk, function(k, v) {

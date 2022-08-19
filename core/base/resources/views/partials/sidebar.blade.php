@@ -2,14 +2,6 @@
     <section class="sidebar">
         <ul class="sidebar-menu" data-widget="tree">
             <li class="">
-                <a href="#">
-                    <i class="fa fa-home"></i> <span>Dashboard</span>
-                    <span class="pull-right-container">
-                        <!--<i class="fa fa-angle-left pull-right"></i>!-->
-                    </span>
-                </a>
-            </li>
-            <li class="">
                 <a href="{{url('basement')}}">
                     <i class="fa fa-bed"></i> <span>Bãi giữ xe</span><span data-toggle="tooltip" title=""></span>
                     <span class="pull-right-container">

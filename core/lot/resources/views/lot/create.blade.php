@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/blog/style.css')}}">
 <div class="content-wrapper">
 		<section class="content-header">
-			<h1>Dashboard<small>Control panel</small></h1>
+			<h1>Thêm mới vị trí</h1>
 			<ol class="breadcrumb">
 				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 				<li class="active">Lot</li>
@@ -29,7 +29,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="name" class="control-label required" aria-required="true">Name:</label>
+											<label for="name" class="control-label required" aria-required="true">Tên:</label>
                   							<input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
 										</div>
 										<div class="form-group">
@@ -64,7 +64,7 @@
 					<div class="col-md-3">
 						<div class="box">
 							<div class="box-header with-border">
-								<h4 class="box-title">Publish</h4>
+								<h4 class="box-title">Công bố</h4>
 							</div>
 							<div class="box-body">
 								<div class="btn-set">

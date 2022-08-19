@@ -7,7 +7,7 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header bg-danger">
-                        <h4 class="modal-title"><i class="til_img"></i><strong>Confirm delete</strong></h4>
+                        <h4 class="modal-title"><i class="til_img"></i><strong>Xóa bản ghi</strong></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -15,7 +15,7 @@
 
                     <form action="" method="get">
                             <div class="modal-body with-padding">
-                                <div>Do you really want to delete this record?</div>
+                                <div>Bạn có muốn xóa bản ghi này?</div>
                             </div>
                         {{csrf_field()}}
                         <div class="modal-footer">
@@ -109,11 +109,11 @@
                     });
                     if(ids.length <= 0)
                     {
-                        alert("Please select row.");
+                        alert("Chưa chọn dòng cần xóa");
                     }
                     else
                     {
-                        var check = confirm("Are you sure you want to delete this row?");
+                        var check = confirm("Bạn có muốn xóa các bản ghi này");
                         if(check == true){
                             var join_selected_values = ids.join(",");
                             var url = '{{ url("/sensor/multi-destroy") }}';
@@ -124,9 +124,9 @@
                                 data: 'ids='+join_selected_values,
                                 success: function (data) {
                                     if(data.status == 'success')
-                                        toastr.success("Delete sensor successfully");
+                                        toastr.success("Xóa cảm biến thành công");
                                 else
-                                        toastr.error("Delete sensor unsuccessfully");
+                                        toastr.error("Xóa cảm biến thất bại");
                                 window.LaravelDataTables["listSensor"].ajax.reload();
                                 },
                                 error: function (error) {

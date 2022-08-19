@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/camera/style.css')}}">
 <div class="content-wrapper">
         <section class="content-header">
-            <h1>Dashboard<small>Control panel</small></h1>
+            <h1>Cập nhật vị trí</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Lot</li>

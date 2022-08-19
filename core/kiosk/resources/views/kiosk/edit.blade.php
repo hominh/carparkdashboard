@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/kiosk/style.css')}}">
 <div class="content-wrapper">
         <section class="content-header">
-            <h1>Dashboard<small>Control panel</small></h1>
+            <h1>Cập nhật kiosk</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Kiosk</li>
@@ -46,7 +46,7 @@
                             <div class="box-body">
                                 <div class="btn-set">
                                     <button type="submit" name="submit" value="save" class="btn btn-info">
-                                        <i class="fa fa-save"></i> Save
+                                        <i class="fa fa-save"></i> Lưu
                                     </button>
                                 </div>
                             </div>
