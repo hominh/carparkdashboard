@@ -52,7 +52,7 @@
 											<label for="overlap" class="control-label required" aria-required="true">overlap:</label>
                   							<input type="text" class="form-control" id="overlap" name="overlap" placeholder="Enter overlap">
 										</div>
-										<div class="form-group">
+										<div class="form-group" style="display: none;">
 											<label for="name" class="control-label required" aria-required="true">id_forS:</label>
                   							<input readonly type="text" class="form-control" id="id_forS" name="id_forS" placeholder="Enter id_forS">
 										</div>
@@ -92,7 +92,7 @@
 								<label for="name" class="control-label required" aria-required="true">Cảm biến</label>
 							</div>
                             <div class="box-body">
-                            	<select class="form-control" name="camera" id="camera">
+                            	<select class="form-control" name="sensor" id="sensor">
                             		<option value="0">Chọn cảm biến</option>
                             		@foreach ($sensors as $sensor)
                             		<option value="{{ $sensor->id }}">{{ $sensor->name }}</option>

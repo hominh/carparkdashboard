@@ -59,6 +59,7 @@ class LotRepository implements LotRepositoryInterface
         $query = "SELECT a.id, a.x1_path,a.y1_path,a.x2_path,a.y2_path,b.plate,b.status,b.id as lot_id, a.kiosk_id as kiosk_id";
         $query.= " FROM lot_paths a LEFT JOIN lots b ON a.lot_id = b.id ";
         $query.= " WHERE b.plate LIKE '%".$plate."%'";
+        $query.= " AND b.status = 1";
         $lot = DB::select(DB::raw($query));
         for($i = 0; $i < count($lot); $i++)
         {

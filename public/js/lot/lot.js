@@ -1,4 +1,9 @@
 $('document').ready(function() {
+
+	setTimeout(function(){
+    	location = ''
+  	},1000 * 60 * 20);
+
 	var l = 1;
 	var isDraw = 0;
 	var pathLen = 0;

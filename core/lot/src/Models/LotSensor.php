@@ -32,7 +32,7 @@ class LotSensor extends Model
      * @var array
      */
     protected $fillable = [
-        'camera_id',
+        'sensor_id',
         'lot_id',
     ];
 

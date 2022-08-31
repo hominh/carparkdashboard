@@ -215,4 +215,34 @@ class LotController extends Controller
         echo json_encode($lot);
     }
 
+    public function destroy($id)
+    {
+        $lot = $this->lot->findById($id);
+        //$permission = $this->authorize('delete', $category);
+        $result = $this->lot->delete($id);
+        if($result == "true")
+            $notification = array(
+                'message' => 'Xóa vị trí thành công',
+                'alert-type' => 'success'
+            );
+        else
+            $notification = array(
+                'message' => 'Xóa vị trí thất bại',
+                'alert-type' => 'warning'
+            );
+        return redirect()->route('lot')->with($notification);
+    }
+
+    public function destroyMultiRecords(Request $request)
+    {
+        //$permission = $this->authorize('multiDelete',Category::class);
+        $ids = $request->ids;
+        $result = $this->lot->deleteMultiRecords($ids);
+
+        if($result == "true")
+            return response()->json(['status'=>'success','message'=>"Lot deleted successfully."]);
+        else
+            return response()->json(['status'=>'error','message'=>"Lot deleted unsuccessfully."]);
+    }
+
 }
