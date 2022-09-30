@@ -9,6 +9,8 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Carparkdashboard\Lot\Repositories\Lot\LotRepositoryInterface;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class LotDataTable extends DataTable
 {
@@ -35,6 +37,19 @@ class LotDataTable extends DataTable
         $data =  $this->lot->getAll();
 
         return datatables()::of($data)
+                /*->addIndexColumn()
+                ->filter(function ($instance) use ($request) {
+                    if (!empty($request->get('search'))) {
+                        $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                            if (Str::contains(Str::lower($row['email']), Str::lower($request->get('search')))){
+                                return true;
+                            }else if (Str::contains(Str::lower($row['name']), Str::lower($request->get('search')))) {
+                                return true;
+                            }
+                            return false;
+                        });
+                    }
+                })*/
                 ->editColumn('checkbox', function ($item) {
                     return '<input type="checkbox" class="group-checkable" value="'.$item->id.'">';
                 })

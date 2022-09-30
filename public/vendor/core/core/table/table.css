@@ -10,3 +10,57 @@
 table.dataTable thead th, table.dataTable thead td {
 	border-bottom: none !important;
 }
+.table-wrapper .table-configuration-wrap {
+    background: #fff;
+    display: none;
+    margin-bottom: 30px;
+    padding: 15px;
+    position: relative;
+}
+.table-wrapper .table-configuration-wrap .configuration-close-btn {
+    background: #ddd;
+    border-radius: 50%!important;
+    cursor: pointer;
+    display: inline-block;
+    height: 32px;
+    line-height: 31px;
+    position: absolute;
+    right: 15px;
+    text-align: center;
+    top: 10px;
+    vertical-align: middle;
+    width: 32px;
+}
+.hidden {
+    display: none!important;
+}
+.table-wrapper .wrapper-filter .form-filter {
+    margin-bottom: 10px;
+}
+.table-wrapper .wrapper-filter .form-filter .ui-select-wrapper, .table-wrapper .wrapper-filter .form-filter .ui-select-wrapper+span, .table-wrapper .wrapper-filter .form-filter>input {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+    width: 190px!important;
+}
+.ui-select:not(.select-search-full) {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: 0 0!important;
+    border: 0;
+    box-sizing: border-box;
+    display: block;
+    font-weight: 400;
+    height: 34px!important;
+    letter-spacing: normal;
+    line-height: 24px;
+    max-width: none;
+    outline: none!important;
+    padding: 4px 8px;
+    text-transform: none;
+    width: 100%;
+}
+select option {
+    padding: 4px;
+}

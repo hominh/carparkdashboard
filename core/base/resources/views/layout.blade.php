@@ -36,6 +36,7 @@
 </body>
 <script>
     $(function() {
+    	$('input[type=search]').val('').change();
     	getStatusConnectDeviceCenter();
     	setInterval(function(){
 			getStatusConnectDeviceCenter();

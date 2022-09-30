@@ -23,14 +23,28 @@
                     </span>
                 </a>
             </li>
-
-            <li class="">
-                <a href="{{url('lot')}}">
-                    <i class="fa fa-history"></i> <span>Vị trí</span><span data-toggle="tooltip" title=""></span>
+            <li class="treeview">
+                <a href="{{url('kiosk')}}">
+                    <i class="fa fa-arrows"></i> <span>Cài đặt vị trí</span><span data-toggle="tooltip" title=""></span>
                     <span class="pull-right-container">
                     </span>
                 </a>
+                <ul class="treeview-menu">
+                    <li class="">
+                        <a href="{{url('status/settings')}}">
+                            <span>Cài đặt tọa độ</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{url('lot')}}">
+                            <i class="fa fa-history"></i> <span>Vị trí</span><span data-toggle="tooltip" title=""></span>
+                            <span class="pull-right-container">
+                            </span>
+                        </a>
+                    </li>
+                </ul>
             </li>
+            
             <li class="treeview">
                 <a href="{{url('kiosk')}}">
                     <i class="fa fa-arrows"></i> <span>Kiosk</span><span data-toggle="tooltip" title=""></span>
@@ -64,11 +78,7 @@
                             <span>Theo dõi trạng thái</span>
                         </a>
                     </li>
-                    <li class="">
-                        <a href="{{url('status/settings')}}">
-                            <span>Cài đặt tọa độ</span>
-                        </a>
-                    </li>
+                    
                     <li class="">
                         <a href="{{url('status/setting-path')}}">
                             <span>Cài đặt đường đi</span>
