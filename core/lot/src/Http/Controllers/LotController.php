@@ -45,10 +45,42 @@ class LotController extends Controller
 	/**
 	* @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
 	*/
-	public function index(LotDataTable $dataTable)
+	public function index()
 	{
-		return $dataTable->render('carparkdashboard-lot::lot.index');
+		return view('carparkdashboard-lot::lot.index');
 	}
+
+    public function filter(Request $request)
+    {
+        $attributes = $request->all();
+
+        $draw = $attributes['draw'];
+        $name = $attributes['namelot'];
+        $type = $attributes['type'];
+        $lots = $this->lot->getList($draw,$name,$type);
+        $data = array();
+        foreach($lots as $row)
+        {
+
+            $sub_array = array();
+            $sub_array[] = $row->id;
+            $sub_array[] = $row->name;
+            $sub_array[] = $row->basement_name;
+            $sub_array[] = $row->camera_name;
+            $sub_array[] = $row->sensor_name;
+            $sub_array[] = $row->overlap;
+            $sub_array[] = $row->status;
+            $sub_array[] = '<a href="'.route('lot.edit',$row->id).'" class="btn btn-icon btn-primary" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-edit"></i></a><a href="#" class="btn btn-icon btn-danger deleteDialog" data-toggle="modal" data-target="#delete" catid="'.$row->id.'"><i class="fa fa-trash"></i></a>';
+            $data[] = $sub_array;
+        }
+        $output = array(
+            "draw" => 1,
+            "recordsTotal"    => count($lots),
+            "recordsFiltered" => count($lots),
+            "data" => $data
+        );
+        echo json_encode($output);
+    }
 
 	public function create() {
 		$cameras = $this->camera->getAll();
@@ -66,7 +98,7 @@ class LotController extends Controller
             'x2' => 'required|integer',
             'y2' => 'required|integer',
         ]);
-       
+
         /*$author_id = Auth::user()->id;
         $request->request->add(['author_id' => $author_id]);*/
         $request->request->add(['status' => 2]);

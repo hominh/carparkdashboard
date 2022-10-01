@@ -32,7 +32,52 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-body">
-                                {!! $dataTable->table(['class' => 'table table-striped']) !!}
+                                <div class="row">
+                                    <form class="form-inline">
+                                        <div class="col-md-2 form-group">
+                                            <label>Tên</label>
+                                            <input type="text" class="form-control" id="namelot" name="namelot" value="">
+                                         </div>
+                                         <div class="col-md-2 form-group">
+                                            <label>Phân loại</label>
+                                            <select class="form-control" id="type" name="type">
+                                                <option value="0">Tất cả</option>
+                                                <option value="1">Camera</option>
+                                                <option value="2">Cảm biến</option>
+                                            </select>
+                                         </div>
+                                         <div class="col-md-3 form-group">
+                                            <button type="button" class="btn btn-primary btn-flat btn-search" id="btnSearch"><i class="fa fa-search"></i>Lọc</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2 form-group" style="margin-top: 15px;">
+                                        <b id="sumLotNotAviable"></b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-body">
+                                <table class="table table-striped" id="listLot">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Tên</th>
+                                            <th>Bãi giữ xe</th>
+                                            <th>Camera</th>
+                                            <th>Cảm biến</th>
+                                            <th>Overlap</th>
+                                            <th>Trạng thái</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -49,8 +94,62 @@
         <script src="/js/datatable/buttons.html5.min.js"></script>
         <script src="/js/datatable/dataTables.bootstrap.min.js"></script>
         <script src="/vendor/datatables/buttons.server-side.js"></script>
-        {!! $dataTable->scripts() !!}
         <script src="/js/toastr/toastr.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                var table;
+                loadLot();
+            });
+
+            function loadLot()
+            {
+                var countLotNotAviable = 0;
+                table = $('#listLot').DataTable({
+                    "destroy": true,
+                    "bInfo" : true,
+                    "bLengthChange": false,
+                    "searching": false,
+                    "paging": true,
+                    "pageLength": 10,
+                    processing: true,
+                    serverSide: true,
+                    "autoWidth": false,
+                    keys: true,
+                    select: true,
+                    order: [[1, 'desc']],
+                    "language": {
+                        "info": '<span class="dt-length-records"><i class="fa fa-globe"></i><span class="d-none d-sm-inline">Hiển thị </span>_START_ đến _END_ trong<span class="badge badge-secondary bold badge-dt">_TOTAL_</span> bản ghi</span>'
+                    },
+                    "ajax":{
+                        url: "http://localhost:8000/lot/filter",
+                        type: "POST",
+                        data: {
+                            "_token": "{{ csrf_token() }}",
+                            "namelot": $('#namelot').val(),
+                            "type" : $('#type').val(),
+                        }
+                    },
+                    "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull
+                ) {
+                        if(aData[6] == "1")
+                        {
+                            $("td:eq(6)", nRow).html('<span class="label-danger status-label">Có xe</span>');
+                            countLotNotAviable ++;
+                        }
+                        if(aData[6] == "2")
+                            $("td:eq(6)", nRow).html('<span class="label-warning status-label">Khởi tạo</span>');
+                        if(aData[6] == "0")
+                            $("td:eq(6)", nRow).html('<span class="label-success status-label">Không có xe</span>');
+
+                        var str = "Có " + countLotNotAviable + " vị trí có xe";
+                        $("#sumLotNotAviable").text(str);
+                    }
+                });
+            }
+            $("#btnSearch").click(function(e) {
+                loadLot();
+            });
+        </script>
         <script>
             @if(Session::has('message'))
                 var type = "{{ Session::get('alert-type', 'info') }}";

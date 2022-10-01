@@ -9,9 +9,32 @@ class LotRepository implements LotRepositoryInterface
 {
 
     const LIMIT = 10;
+    public function getList($draw,$name,$type)
+    {
+    	//return Lot::orderBy('status')->with('camera')->with('sensor')->with('basement')->get();
+        $query = "SELECT a.id,a.name,a.overlap, a.status,c.name as basement_name,c.id as basement_id, e.name as camera_name, e.id as camera_id,g.name as sensor_name,g.id as sensor_id FROM lots a ";
+        $query.= " LEFT JOIN  lot_basement b ON a.id = b.lot_id ";
+        $query.= " LEFT JOIN basements c ON b.basement_id = c.id ";
+        $query.= " LEFT JOIN lot_camera d ON a.id = d.lot_id ";
+        $query.= " LEFT JOIN cameras e ON d.camera_id = e.id ";
+        $query.= " LEFT JOIN lot_sensor f ON a.id = f.lot_id ";
+        $query.= " LEFT JOIN sensors g ON f.sensor_id = g.id WHERE 1 = 1";
+        if(!empty($name))
+            $query.= " AND a.name LIKE '%".$name."%'";
+        if($type > 0)
+        {
+            if($type == 1)
+                $query.= " AND e.name != ''";
+            if($type == 2)
+                $query.= " AND g.name != ''";
+        }
+        $result = DB::select(DB::raw($query));
+        return $result;
+    }
+
     public function getAll()
     {
-    	return Lot::orderBy('status')->with('camera')->with('sensor')->with('basement')->get();
+        return Lot::orderBy('status')->with('camera')->with('sensor')->with('basement')->get();
     }
 
     public function countLot($basement,$status)

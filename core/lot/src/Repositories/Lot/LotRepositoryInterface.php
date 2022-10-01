@@ -4,6 +4,7 @@
 
 	interface LotRepositoryInterface
 	{
+		public function getList($draw,$name,$type);
 		public function getAll();
 		public function countLot($basement,$status);
 		public function tracking($basement);

@@ -1,6 +1,7 @@
 <?php
 	Route::group(['namespace' => 'Carparkdashboard\Lot\Http\Controllers','middleware' => 'web'], function () {
 		Route::get('/lot',['as'=>'lot','uses'=>'LotController@index']);
+		Route::post('/lot/filter',['as'=>'lot.filter','uses'=>'LotController@filter']);
 		Route::get('/lot/create', 'LotController@create');
 		Route::post('/lot/store',['as'=>'lot.store','uses'=>'LotController@store']);
 		Route::post('/lot/create-slug',['as'=>'lot.create-slug','uses'=>'LotController@createSlug']);
