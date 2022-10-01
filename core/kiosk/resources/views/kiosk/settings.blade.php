@@ -89,8 +89,17 @@
 </div>
 <link rel="stylesheet" type="text/css" href="/css/toastr/toastr.css">
 <script src="/js/toastr/toastr.min.js"></script>
+<script src="/js/konva/konva.min.js"></script>
 <script type="text/javascript">
 	$('document').ready(function() {
+		var sceneWidth = $("#drawingArea").innerWidth();
+	    var sceneHeight = $("#drawingArea").innerHeight();
+	    var stage = new Konva.Stage({
+	        container: 'drawingArea',
+	        width: sceneWidth,
+	        height: sceneHeight,
+	   	});
+	   	var layer = new Konva.Layer();
 		$('#drawingArea').click(function (e){
 			var isSetvalue = 0;
 			var $this = $(this); // or use $(e.target) in some cases;
@@ -201,11 +210,32 @@
 		$('#basement').change(function() {
 	    	var id = $(this).val();
 	    	loadDataByBasement(id);
+	    	var kiosk =  $("#kiosk :selected").val();
+	    	loadDataByKiosk(kiosk);
 		});
-		
+
+		$('#kiosk').change(function() {
+	    	var id = $(this).val();
+	    	loadDataByKiosk(id);
+		});
 
 		function loadDataByBasement(basement)
 		{
+			var images = layer.find('Image');
+			if(images.length > 0)
+   			{
+   				for(var i =0; i <images.length; i++)
+   					images[i].remove();
+   			}
+   			var imageObj = new Image();
+			imageObj.onload = function () {
+			    var parking_img = new Konva.Image({
+			        image: imageObj,
+			    });
+			    layer.add(parking_img);
+			    parking_img.moveToBottom();
+			    stage.add(layer);
+			};
 			$('#kiosk')
     			.find('option')
     			.remove();
@@ -218,13 +248,75 @@
 	                basement: basement,
 	            },
 				success: function( data ) {
-					$("#image_preview").attr("src", JSON.parse(data).image);
+					//$("#image_preview").attr("src", JSON.parse(data).image);
+					imageObj.src = JSON.parse(data).image;
 					$.each(JSON.parse(data).kiosk, function(k, v) {
 						$('#kiosk')
          					.append($("<option></option>")
                     		.attr("value", v.id)
-                    		.text(v.name)); 
+                    		.text(v.name));
 					});
+					var kiosk =  $("#kiosk :selected").val();
+	    			loadDataByKiosk(kiosk);
+				},
+
+			});
+		}
+		function loadDataByKiosk(kiosk)
+		{
+			var rects = layer.find('Rect');
+   			if(rects.length > 0)
+   			{
+   				for(var i =0; i <rects.length; i++)
+   					rects[i].remove();
+   			}
+   			var simpleTexts = layer.find('Text');
+   			if(simpleTexts.length > 0)
+   			{
+   				for(var i =0; i <simpleTexts.length; i++)
+   					simpleTexts[i].remove();
+   			}
+			var url = "{{URL('kiosk/getdatabyid/')}}";
+	    	$.ajax({
+				url: url,
+				method:"POST",
+				data: {
+	                "_token": $('meta[name="_token"]').attr('content'),
+	                kiosk: kiosk,
+	            },
+				success: function( data ) {
+					console.log(JSON.parse(data));
+					$('#x1').val(JSON.parse(data).x1);
+					$('#y1').val(JSON.parse(data).y1);
+					$('#x2').val(JSON.parse(data).x2);
+					$('#y2').val(JSON.parse(data).y2);
+					var height = parseInt(JSON.parse(data).y2) - parseInt(JSON.parse(data).y1);
+					var width = parseInt(JSON.parse(data).x2) - parseInt(JSON.parse(data).x1);
+					var x_text = (parseInt(JSON.parse(data).x2) + parseInt(JSON.parse(data).x1)) / 2;
+					var y_text = (parseInt(JSON.parse(data).y2) + parseInt(JSON.parse(data).y1)) / 2;
+					var simpleText = new Konva.Text({
+				        x: x_text,
+				        y: y_text,
+				        text: JSON.parse(data).name,
+				        fontSize: 20,
+				        fontFamily: 'Arial',
+				        fill: 'black',
+				   	});
+				   	simpleText.offsetX(simpleText.width() / 2);
+					simpleText.offsetY(simpleText.height() / 2);
+					var rect = new Konva.Rect({
+				        x: parseInt(JSON.parse(data).x1),
+				        y: parseInt(JSON.parse(data).y1),
+				        width: width,
+				        height: height,
+				        fill: 'cyan',
+				        stroke: 'black',
+				        strokeWidth: 1,
+				   	});
+				   	stage.add(layer);
+				   	layer.draw();
+					layer.add(rect);
+					layer.add(simpleText);
 				},
 
 			});

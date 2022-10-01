@@ -152,4 +152,12 @@ class KioskController extends Controller
         return $kiosk_update->id;
     }
 
+    public function getDataById(Request $request)
+    {
+        $data = $request->all();
+        $id = $data["kiosk"];
+        $kiosk = $this->kiosk->findById($id)->toJson();
+        return $kiosk;
+    }
+
 }

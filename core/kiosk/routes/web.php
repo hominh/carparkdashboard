@@ -9,5 +9,5 @@
 		Route::delete('/kiosk/multi-destroy',['as'=>'kiosk.multi-destroy','uses'=>'KioskController@destroyMultiRecords']);
 		Route::get('/kiosk/settings',['as'=>'kiosk.settings','uses'=>'KioskController@settings']);
 		Route::post('/kiosk/updateSettings/{id}',['as'=>'kiosk.update_settings','uses'=>'KioskController@updateSettings']);
-
+		Route::post('/kiosk/getdatabyid',['as'=>'kiosk.getdatabyid','uses'=>'KioskController@getDataById']);
 });
