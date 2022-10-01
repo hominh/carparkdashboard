@@ -104,6 +104,7 @@
             function loadLot()
             {
                 var countLotNotAviable = 0;
+                var url = "{{URL('lot/filter/')}}";
                 table = $('#listLot').DataTable({
                     "destroy": true,
                     "bInfo" : true,
@@ -121,7 +122,7 @@
                         "info": '<span class="dt-length-records"><i class="fa fa-globe"></i><span class="d-none d-sm-inline">Hiển thị </span>_START_ đến _END_ trong<span class="badge badge-secondary bold badge-dt">_TOTAL_</span> bản ghi</span>'
                     },
                     "ajax":{
-                        url: "http://localhost:8000/lot/filter",
+                        url: url,
                         type: "POST",
                         data: {
                             "_token": "{{ csrf_token() }}",
