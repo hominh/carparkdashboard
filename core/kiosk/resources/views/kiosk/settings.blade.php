@@ -262,7 +262,8 @@
 
 			});
 		}
-		function loadDataByKiosk(kiosk)
+
+		function resetKiosks()
 		{
 			var rects = layer.find('Rect');
    			if(rects.length > 0)
@@ -276,6 +277,11 @@
    				for(var i =0; i <simpleTexts.length; i++)
    					simpleTexts[i].remove();
    			}
+		}
+
+		function loadDataByKiosk(kiosk)
+		{
+			resetKiosks();
 			var url = "{{URL('kiosk/getdatabyid/')}}";
 	    	$.ajax({
 				url: url,
@@ -285,7 +291,6 @@
 	                kiosk: kiosk,
 	            },
 				success: function( data ) {
-					console.log(JSON.parse(data));
 					$('#x1').val(JSON.parse(data).x1);
 					$('#y1').val(JSON.parse(data).y1);
 					$('#x2').val(JSON.parse(data).x2);
@@ -309,7 +314,7 @@
 				        y: parseInt(JSON.parse(data).y1),
 				        width: width,
 				        height: height,
-				        fill: 'cyan',
+				        fill: 'yellow',
 				        stroke: 'black',
 				        strokeWidth: 1,
 				   	});
@@ -321,6 +326,55 @@
 
 			});
 		}
+
+		function drawKiosk()
+		{
+			resetKiosks();
+			var x1 = $('#x1').val();
+			var x2 = $('#x2').val();
+			var y1 = $('#y1').val();
+			var y2 = $('#y2').val();
+			var height = parseInt(y2) - parseInt(y1);
+			var width = parseInt(x2) - parseInt(x1);
+			var x_text = (parseInt(x2) + parseInt(x1)) / 2;
+			var y_text = (parseInt(y2) + parseInt(y1)) / 2;
+			var simpleText = new Konva.Text({
+		        x: x_text,
+		        y: y_text,
+		        text: $( "#kiosk option:selected" ).text(),
+		        fontSize: 20,
+		        fontFamily: 'Arial',
+		        fill: 'black',
+		   	});
+		   	simpleText.offsetX(simpleText.width() / 2);
+			simpleText.offsetY(simpleText.height() / 2);
+			var rect = new Konva.Rect({
+		        x: parseInt(x1),
+		        y: parseInt(y1),
+		        width: width,
+		        height: height,
+		        fill: 'yellow',
+		        stroke: 'black',
+		        strokeWidth: 1,
+		   	});
+		   	stage.add(layer);
+		   	layer.draw();
+			layer.add(rect);
+			layer.add(simpleText);
+		}
+
+		$('#x1').on('input',function(e){
+    		drawKiosk();
+		});
+		$('#x2').on('input',function(e){
+    		drawKiosk();
+		});
+		$('#y1').on('input',function(e){
+    		drawKiosk();
+		});
+		$('#y2').on('input',function(e){
+    		drawKiosk();
+		});
 	});
 </script>
 @endsection
